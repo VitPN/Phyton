@@ -1,0 +1,127 @@
+# -*- coding: utf-8 -*-
+from time import sleep
+from os import system, name
+from datetime import datetime
+
+def clear():
+    if name == "nt":
+        system("cls")
+    else:
+        system("clear")
+
+def translate(text):
+    text = str(text)
+    letters = []
+    for letter in text:
+        letters.append(LETTERS[letter])
+    for i in range(5):
+        for letter in letters:
+            print letter.splitlines()[i],
+        print
+
+LETTERS = {
+    "1": u"""\
+  ██  
+████  
+  ██  
+  ██  
+██████""",
+
+    "2": u"""\
+██████
+    ██
+██████
+██    
+██████""",
+
+    "3": u"""\
+██████
+    ██
+██████
+    ██
+██████""",
+
+    "4": u"""\
+██  ██
+██  ██
+██████
+    ██
+    ██""",
+
+    "5": u"""\
+██████
+██
+██████
+    ██
+██████""",
+
+    "6": u"""\
+██████
+██
+██████
+██  ██
+██████""",
+
+    "7": u"""\
+██████
+    ██
+    ██
+    ██
+    ██""",
+
+    "8": u"""\
+██████
+██  ██
+██████
+██  ██
+██████""",
+
+    "9": u"""\
+██████
+██  ██
+██████
+    ██
+██████""",
+
+    "0": u"""\
+██████
+██  ██
+██  ██
+██  ██
+██████""",
+
+    ":": u"""\
+    
+ ██ 
+    
+ ██ 
+    """,
+
+    " ": u"""\
+  
+  
+  
+  
+  """,
+
+}
+
+def clock():
+    while 1:
+        try:
+            ctime = datetime.now()
+            values = [ctime.hour, ctime.minute, ctime.second]
+            join_values = []
+            for value in values:
+                svalue = str(value)
+                svalue = svalue if len(svalue) == 2 else "0" + svalue
+                join_values.append(svalue)
+            translate(":".join(join_values))
+            sleep(0.5)
+            clear()
+        except (KeyboardInterrupt, IOError):
+            clear()
+            break
+
+clear()
+clock()
